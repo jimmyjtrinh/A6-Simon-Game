@@ -3,6 +3,13 @@
 
 #include <QObject>
 #include <stdlib.h>
+#include <QQueue>
+#include <iostream>
+#include <QTimer>
+
+using std::rand;
+using std::cout;
+using std::endl;
 
 class Model : public QObject
 {
@@ -13,6 +20,7 @@ public:
 public slots:
     void addOne();
     void gameStart();
+    void showOrder(int);
 
 signals:
     void updateView(int);
@@ -20,6 +28,8 @@ signals:
 
 private:
     int data;
+    QQueue<int> order;
+    QTimer timer;
 
 };
 
