@@ -42,9 +42,11 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         redButton = new QPushButton(centralwidget);
         redButton->setObjectName(QString::fromUtf8("redButton"));
+        redButton->setEnabled(false);
         redButton->setGeometry(QRect(190, 210, 181, 161));
         blueButton = new QPushButton(centralwidget);
         blueButton->setObjectName(QString::fromUtf8("blueButton"));
+        blueButton->setEnabled(false);
         blueButton->setGeometry(QRect(400, 210, 181, 161));
         startButton = new QPushButton(centralwidget);
         startButton->setObjectName(QString::fromUtf8("startButton"));

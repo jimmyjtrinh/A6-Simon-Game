@@ -9,7 +9,16 @@ class Model : public QObject
 public:
     explicit Model(QObject *parent = nullptr);
 
+public slots:
+    void addOne();
+    void gameStart();
+
 signals:
+    void updateView(int);
+    void startGame(bool);
+
+private:
+    int data;
 
 };
 
