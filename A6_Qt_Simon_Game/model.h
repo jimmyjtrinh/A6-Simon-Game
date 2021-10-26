@@ -20,11 +20,16 @@ public:
 public slots:
     void addOne();
     void gameStart();
-    void showOrder(int);
+    void showRed();
+    void stopShowingRed();
+    void showBlue();
+    void stopShowingBlue();
 
 signals:
     void updateView(int);
     void startGame(bool);
+    void redSignal(QString);
+    void blueSignal(QString);
 
 private:
     int data;

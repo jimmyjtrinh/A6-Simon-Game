@@ -11,19 +11,32 @@ void Model::gameStart(){
         order.enqueue(rand() % 2);
     }
 
-    for(auto number : order)
+
+    for(int i = 0; i < order.length(); i ++)
     {
-        switch (number){
-            case 0:
-                timer.singleShot(1000, this, &Model::addOne);
-//                timer.singleShot(1000, this, [](){showOrder(number);});
-
-
-                break;
-            case 1:
-                break;
+        switch(order[i])
+        {
+        case 0:
+            timer.singleShot(1250 * i, this, &Model::showRed);
+            break;
+        case 1:
+            timer.singleShot(1250 * i, this, &Model::showBlue);
+            break;
         }
     }
+
+//    for(auto number : order)
+//    {
+//        switch (number){
+//            case 0:
+//                timer.singleShot(1000, this, &Model::addOne);
+
+
+//                break;
+//            case 1:
+//                break;
+//        }
+//    }
 
 
     emit startGame(true);
@@ -34,6 +47,23 @@ void Model::addOne(){
     emit updateView(data);
 }
 
-void Model::showOrder(int number){
+void Model::showRed(){
+    cout << "red" << endl;
+    emit redSignal(QString("QPushButton {background-color: rgb(255,150,150);} QPushButton:pressed {background-color: rgb(255,150,150);}"));
+    timer.singleShot(1000, this, &Model::stopShowingRed);
+}
+
+void Model::showBlue(){
+    cout << "blue" << endl;
+    emit blueSignal(QString("QPushButton {background-color: rgb(150,150,255);} QPushButton:pressed {background-color: rgb(255,150,150);}"));
+    timer.singleShot(1000, this, &Model::stopShowingBlue);
+}
+
+void Model::stopShowingRed(){
+    emit redSignal(QString("QPushButton {background-color: rgb(200,50,50);} QPushButton:pressed {background-color: rgb(255,150,150);}"));
+}
+
+void Model::stopShowingBlue(){
+    emit blueSignal(QString("QPushButton {background-color: rgb(50,50,200);} QPushButton:pressed {background-color: rgb(150,150,255);}"));
 
 }

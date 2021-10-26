@@ -7,12 +7,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->redButton->setStyleSheet( QString("QPushButton {background-color: rgb(200,50,50);} QPushButton:pressed {background-color: rgb(255,150,150);}"));
+    ui->blueButton->setStyleSheet( QString("QPushButton {background-color: rgb(50,50,200);} QPushButton:pressed {background-color: rgb(150,150,255);}"));
+
     //connecting the updateView signal emission with the progress bar in UI
     connect(&model, &Model::updateView, ui->progressBar, &QProgressBar::setValue);
 
     //enabling buttons when the game starts
     connect(&model, &Model::startGame, ui->redButton, &QPushButton::setEnabled);
     connect(&model, &Model::startGame, ui->blueButton, &QPushButton::setEnabled);
+
+    connect(&model, &Model::redSignal, ui->redButton, &QPushButton::setStyleSheet);
+    connect(&model, &Model::blueSignal, ui->blueButton, &QPushButton::setStyleSheet);
 
 
     //connecting our start button with the gameStart method that will start the game
