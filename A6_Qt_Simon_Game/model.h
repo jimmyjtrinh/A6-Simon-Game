@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include <QObject>
+#include <stdlib.h>
 
 class Model : public QObject
 {
