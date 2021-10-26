@@ -16,8 +16,21 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_redButton_pressed();
+
+
+    void on_blueButton_pressed();
+
+    void on_startButton_clicked();
+
+signals:
+    void updateData(int);
+
 private:
     Ui::MainWindow *ui;
     Model model;
+
+    int data; //******************** want to modify later to be in the model or delete***************************
 };
 #endif // MAINWINDOW_H
