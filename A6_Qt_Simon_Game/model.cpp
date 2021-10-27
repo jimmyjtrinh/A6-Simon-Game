@@ -2,35 +2,46 @@
 
 Model::Model(QObject *parent) : QObject(parent)
 {
-    data = 0;
+    progress = 0;
+    highScore = 0;
+    delay = 1500;
 }
 
 void Model::gameStart(){
+    expectedOrder.clear();
+    playerOrder.clear();
+    emit loseSignal(false);
     for(int i = 0; i < 3; i ++)
     {
         expectedOrder.enqueue(rand() % 2);
     }
-    emit disableStartButton(false);
-    Model::showOrder();
+    emit enableStartButton(false);
+    timer.singleShot(1000, this, &Model::showOrder);
 }
 
 
 
 void Model::showOrder(){
+    if(delay > 300){
+        delay = 1500 - (100 * expectedOrder.length());
+    }
     emit enableRedBlueButtons(false);
-    timer.singleShot(1250 * (expectedOrder.length()) + 1, this, &Model::enableButtons);
+
+    timer.singleShot(delay * (expectedOrder.length()) + 1, this, &Model::enableButtons);
     for(int i = 0; i < expectedOrder.length(); i ++)
     {
         switch(expectedOrder[i])
         {
         case 0:
-            timer.singleShot(1250 * i, this, &Model::showRed);
+            timer.singleShot(delay * i, this, &Model::showRed);
             break;
         case 1:
-            timer.singleShot(1250 * i, this, &Model::showBlue);
+            timer.singleShot(delay * i, this, &Model::showBlue);
             break;
         }
     }
+    showProgress();
+
 }
 
 void Model::enableButtons(){
@@ -38,21 +49,18 @@ void Model::enableButtons(){
 }
 
 void Model::showProgress(){
-    data = ((playerOrder.length() * 1.0) / (expectedOrder.length() * 1.0)) * 100;
-    cout << "updating progress : " << data  << endl;
-    emit updateView(data);
+    progress = ((playerOrder.length() * 1.0) / (expectedOrder.length() * 1.0)) * 100;
+    emit updateView(progress);
 }
 
 void Model::showRed(){
-    cout << "red" << endl;
     emit redSignal(QString("QPushButton {background-color: rgb(255,150,150);}"));
-    timer.singleShot(1000, this, &Model::stopShowingRed);
+    timer.singleShot(delay - 200, this, &Model::stopShowingRed);
 }
 
 void Model::showBlue(){
-    cout << "blue" << endl;
     emit blueSignal(QString("QPushButton {background-color: rgb(150,150,255);}"));
-    timer.singleShot(1000, this, &Model::stopShowingBlue);
+    timer.singleShot(delay - 200, this, &Model::stopShowingBlue);
 }
 
 void Model::stopShowingRed(){
@@ -77,9 +85,15 @@ void Model::bluePush(){
 void Model::updateGame(int i){
     if(expectedOrder[i] != playerOrder[i])
     {
+        if(highScore < expectedOrder.length()){
+            highScore = expectedOrder.length();
+            emit updateScoreSignal(QString::number(highScore));
+        }
         //HAHA U LOSE LOOOSER
+        emit lastScoreSignal(QString::number(expectedOrder.length()));
         emit enableRedBlueButtons(false);
-
+        emit loseSignal(true);
+        emit enableStartButton(true);
         cout << "WRONG" << endl;
     }
 

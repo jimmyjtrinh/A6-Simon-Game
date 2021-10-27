@@ -7,8 +7,26 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
+
     ui->redButton->setStyleSheet( QString("QPushButton {background-color: rgb(200,50,50);} QPushButton:pressed {background-color: rgb(255,150,150);}"));
     ui->blueButton->setStyleSheet( QString("QPushButton {background-color: rgb(50,50,200);} QPushButton:pressed {background-color: rgb(150,150,255);}"));
+
+    ui->loseLabel->setVisible(false);
+    ui->highScoreLabel->setVisible(false);
+    ui->scoreLabel->setVisible(false);
+    ui->lastGameScoreLabel->setVisible(false);
+    ui->lastScoreLabel->setVisible(false);
+
+    connect(&model, &Model::loseSignal, ui->loseLabel, &QLabel::setVisible);
+    connect(&model, &Model::loseSignal, ui->highScoreLabel, &QLabel::setVisible);
+    connect(&model, &Model::loseSignal, ui->scoreLabel, &QLabel::setVisible);
+    connect(&model, &Model::loseSignal, ui->lastGameScoreLabel, &QLabel::setVisible);
+    connect(&model, &Model::loseSignal, ui->lastScoreLabel, &QLabel::setVisible);
+    connect(&model, &Model::updateScoreSignal, ui->scoreLabel, &QLabel::setText);
+    connect(&model, &Model::lastScoreSignal, ui->lastScoreLabel, &QLabel::setText);
+
 
     //connecting the updateView signal emission with the progress bar in UI
     connect(&model, &Model::updateView, ui->progressBar, &QProgressBar::setValue);
@@ -24,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     //connecting our start button with the gameStart method that will start the game
     connect(ui->startButton, &QPushButton::clicked, &model, &Model::gameStart);
 
-    connect(&model, &Model::disableStartButton, ui->startButton, &QPushButton::setEnabled);
+    connect(&model, &Model::enableStartButton, ui->startButton, &QPushButton::setEnabled);
 
 
 

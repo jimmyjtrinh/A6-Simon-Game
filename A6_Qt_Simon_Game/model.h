@@ -33,15 +33,20 @@ public slots:
 signals:
     void updateView(int);
     void enableRedBlueButtons(bool);
-    void disableStartButton(bool);
+    void enableStartButton(bool);
     void redSignal(QString);
     void blueSignal(QString);
+    void loseSignal(bool);
+    void updateScoreSignal(QString);
+    void lastScoreSignal(QString);
 
 private:
-    float data;
+    float progress;
     QQueue<int> expectedOrder;
     QQueue<int> playerOrder;
     QTimer timer;
+    float delay;
+    int highScore;
 
 };
 
