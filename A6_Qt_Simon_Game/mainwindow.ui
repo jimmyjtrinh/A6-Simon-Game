@@ -55,6 +55,11 @@
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Start</string>
     </property>
@@ -62,9 +67,9 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>260</x>
       <y>130</y>
-      <width>118</width>
+      <width>271</width>
       <height>23</height>
      </rect>
     </property>
@@ -75,7 +80,7 @@
    <widget class="QLabel" name="title">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>150</x>
       <y>10</y>
       <width>471</width>
       <height>81</height>

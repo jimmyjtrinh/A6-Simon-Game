@@ -89,12 +89,10 @@ void Model::updateGame(int i){
             highScore = expectedOrder.length();
             emit updateScoreSignal(QString::number(highScore));
         }
-        //HAHA U LOSE LOOOSER
         emit lastScoreSignal(QString::number(expectedOrder.length()));
         emit enableRedBlueButtons(false);
         emit loseSignal(true);
         emit enableStartButton(true);
-        cout << "WRONG" << endl;
     }
 
     showProgress();
