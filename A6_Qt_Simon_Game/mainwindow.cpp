@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&model, &Model::updateView, ui->progressBar, &QProgressBar::setValue);
 
     //enabling buttons when the game starts
-    connect(&model, &Model::startGame, ui->redButton, &QPushButton::setEnabled);
-    connect(&model, &Model::startGame, ui->blueButton, &QPushButton::setEnabled);
+    connect(&model, &Model::enableRedBlueButtons, ui->redButton, &QPushButton::setEnabled);
+    connect(&model, &Model::enableRedBlueButtons, ui->blueButton, &QPushButton::setEnabled);
 
     connect(&model, &Model::redSignal, ui->redButton, &QPushButton::setStyleSheet);
     connect(&model, &Model::blueSignal, ui->blueButton, &QPushButton::setStyleSheet);
@@ -24,14 +24,16 @@ MainWindow::MainWindow(QWidget *parent)
     //connecting our start button with the gameStart method that will start the game
     connect(ui->startButton, &QPushButton::clicked, &model, &Model::gameStart);
 
+    connect(&model, &Model::disableStartButton, ui->startButton, &QPushButton::setEnabled);
 
 
 
-    //connecting redButton with the add one method inside the model
-    connect(ui->redButton, &QPushButton::pressed, &model, &Model::addOne);
 
-    //connecting blueButton with the add one method inside the model
-    connect(ui->blueButton, &QPushButton::pressed, &model, &Model::addOne);
+    //connecting redButton with the redPush method inside the model
+    connect(ui->redButton, &QPushButton::pressed, &model, &Model::redPush);
+
+    //connecting blueButton with the bluePush method inside the model
+    connect(ui->blueButton, &QPushButton::pressed, &model, &Model::bluePush);
 }
 
 MainWindow::~MainWindow()

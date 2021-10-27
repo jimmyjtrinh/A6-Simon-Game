@@ -18,22 +18,29 @@ public:
     explicit Model(QObject *parent = nullptr);
 
 public slots:
-    void addOne();
+    void showProgress();
     void gameStart();
+    void showOrder();
+    void enableButtons();
     void showRed();
     void stopShowingRed();
     void showBlue();
     void stopShowingBlue();
+    void redPush();
+    void bluePush();
+    void updateGame(int);
 
 signals:
     void updateView(int);
-    void startGame(bool);
+    void enableRedBlueButtons(bool);
+    void disableStartButton(bool);
     void redSignal(QString);
     void blueSignal(QString);
 
 private:
-    int data;
-    QQueue<int> order;
+    float data;
+    QQueue<int> expectedOrder;
+    QQueue<int> playerOrder;
     QTimer timer;
 
 };
