@@ -1,3 +1,8 @@
+/*
+ * Jimmy Trinh && Jacob Day
+ * Software Practice II, CS 3505
+ * A6: Qt Simon Game
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -15,10 +20,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-
-    //void on_startButton_clicked();
 
 private:
     Ui::MainWindow *ui;

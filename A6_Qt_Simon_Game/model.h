@@ -1,3 +1,8 @@
+/*
+ * Jimmy Trinh && Jacob Day
+ * Software Practice II, CS 3505
+ * A6: Qt Simon Game
+ */
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -8,8 +13,6 @@
 #include <QTimer>
 
 using std::rand;
-using std::cout;
-using std::endl;
 
 class Model : public QObject
 {
@@ -18,20 +21,20 @@ public:
     explicit Model(QObject *parent = nullptr);
 
 public slots:
-    void showProgress();
-    void gameStart();
-    void showOrder();
-    void enableButtons();
-    void showRed();
-    void stopShowingRed();
-    void showBlue();
-    void stopShowingBlue();
-    void redPush();
-    void bluePush();
-    void updateGame(int);
+    void showProgress(); //updates the progress bar
+    void gameStart(); //starts the sequence of the game
+    void showOrder(); //displays the sequence to the view
+    void enableButtons(); //enable red/blue buttons
+    void showRed(); //changes red button to light red
+    void stopShowingRed(); //changes red button back to default red
+    void showBlue(); //changes blue button to light blue
+    void stopShowingBlue(); //changes blue button back to default blue
+    void redPush(); //input from user
+    void bluePush(); //input from user
+    void updateGame(int); //updates the current game model
 
 signals:
-    void updateView(int);
+    void updateProgress(int);
     void enableRedBlueButtons(bool);
     void enableStartButton(bool);
     void redSignal(QString);
@@ -47,7 +50,6 @@ private:
     QTimer timer;
     float delay;
     int highScore;
-
 };
 
 #endif // MODEL_H

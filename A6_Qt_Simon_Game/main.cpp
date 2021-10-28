@@ -1,3 +1,8 @@
+/*
+ * Jimmy Trinh && Jacob Day
+ * Software Practice II, CS 3505
+ * A6: Qt Simon Game
+ */
 #include "mainwindow.h"
 
 #include <QApplication>
