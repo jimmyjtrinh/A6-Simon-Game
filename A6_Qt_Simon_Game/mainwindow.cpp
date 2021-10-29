@@ -45,8 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&model, &Model::blueSignal, ui->blueButton, &QPushButton::setStyleSheet);
 
     //connecting the red/blue buttons with the red/blue push method inside the model
-    connect(ui->redButton, &QPushButton::pressed, &model, &Model::redPush);
-    connect(ui->blueButton, &QPushButton::pressed, &model, &Model::bluePush);
+    connect(ui->redButton, &QPushButton::clicked, &model, &Model::redPush);
+    connect(ui->blueButton, &QPushButton::clicked, &model, &Model::bluePush);
 
     //connecting our start button with the gameStart method that will start the game
     connect(ui->startButton, &QPushButton::clicked, &model, &Model::gameStart);
@@ -56,3 +56,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
